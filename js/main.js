@@ -22,9 +22,7 @@ document.getElementById("analyze").onclick = () => {
     }
 
     // 解析
-    let startTime;
-    function analyze(tokenizer) {
-        const result = tokenizer.tokenize(analyzeText.value);
+    function showResult(result) {
         const endTime = performance.now();
 
         const resultText = document.getElementById("resultText");
@@ -36,15 +34,16 @@ document.getElementById("analyze").onclick = () => {
         // ローディングモーダルを隠す
         loadingModal.hide();
     }
+    const startTime = performance.now();
     if (document.getElementById("useStandard").checked) {
-        startTime = performance.now();
         kuromoji.builder({ dicPath: "./js/dicts/standard/" }).build((err, tokenizer) => {
-            analyze(tokenizer);
+            showResult(tokenizer.tokenize(analyzeText.value));
+        });
+    } else if (document.getElementById("useNeologd").checked) {
+        kuromoji.builder({ dicPath: "./js/dicts/neologd/" }).build((err, tokenizer) => {
+            showResult(tokenizer.tokenize(analyzeText.value));
         });
     } else {
-        startTime = performance.now();
-        kuromoji.builder({ dicPath: "./js/dicts/neologd/" }).build((err, tokenizer) => {
-            analyze(tokenizer);
-        });
+        showResult(new TinySegmenter().segment(analyzeText.value));
     }
 };
