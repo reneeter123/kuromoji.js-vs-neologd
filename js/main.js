@@ -29,6 +29,7 @@ document.getElementById("analyze").onclick = () => {
 
         const resultText = document.getElementById("resultText");
         resultText.value = JSON.stringify(result, null, 4);
+        resultText.style.height = "0px";
         resultText.style.height = resultText.scrollHeight + "px";
         document.getElementById("resultTime").value = (endTime - startTime) / 1000;
 
