@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+        integrity="sha256-DU9iQBJ89dHP2iyusCg++0ych55DAx8QL6P8CYU64bI=" crossorigin="anonymous">
+
+    <title>kuromoji.js vs NEologd</title>
+</head>
+
+<body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">kuromoji.js vs NEologd</a>
+            <span class="navbar-text me-auto">v1.0</span>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/reneeter123/kuromoji.js-vs-neologd">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- アラート -->
+    <div class="alert alert-info text-center">
+        kuromoji.jsの標準辞書とmecab-ipadic-NEologdを追加した辞書の比較サイト。
+    </div>
+
+    <!-- 解析 -->
+    <div class="text-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="useDictionary" id="useStandard" checked>
+            <label class="form-check-label" for="useStandard">kuromoji.jsの標準辞書</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="useDictionary" id="useNeologd">
+            <label class="form-check-label" for="useNeologd">mecab-ipadic-NEologd（mecab-user-dict-seed）を追加した辞書</label>
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">解析するテキスト</span>
+            <textarea style="overflow: hidden; resize: none;" rows="1" class="form-control" id="analyzeText"></textarea>
+            <button type="button" class="btn btn-outline-primary" id="analyze">解析</button>
+        </div>
+    </div>
+
+    <!-- エラーモーダル -->
+    <div class="modal" id="errorModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">エラー</h5>
+                </div>
+                <div class="modal-body">
+                    <p>解析するテキストが空です。</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ローディングモーダル -->
+    <div class="modal" id="loadingModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex align-items-center">
+                        <strong>解析中…</strong>
+                        <div class="spinner-border ms-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 解析結果 -->
+    <div class="input-group">
+        <span class="input-group-text">解析結果</span>
+        <textarea style="overflow: hidden; resize: none;" rows="1" class="form-control" id="resultText"
+            readonly></textarea>
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">解析時間</span>
+        <input class="form-control" id="resultTime" readonly></input>
+        <span class="input-group-text">秒</span>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha256-BTBKjyY3MULvoSaoeXcgHLwi1AjFc/FR7ikHkz6Qmfc=" crossorigin="anonymous"></script>
+    <!-- kuromoji.js -->
+    <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.min.js"></script>
+    <!-- メインJS -->
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
