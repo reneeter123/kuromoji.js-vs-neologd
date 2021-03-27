@@ -15,13 +15,15 @@ document.getElementById("analyze").onclick = () => {
     loadingModal.show();
 
     // 解析するテキストが空ならエラー
-    if (!analyzeText.value) {
+    const analyzeTextValue = analyzeText.value.replaceAll("\n", "");
+    if (!analyzeTextValue) {
         loadingModal.hide();
         new bootstrap.Modal(document.getElementById("errorModal"), { backdrop: "static" }).show();
         return;
     }
 
     // 解析
+    let startTime;
     function showResult(result) {
         const endTime = performance.now();
 
@@ -34,16 +36,18 @@ document.getElementById("analyze").onclick = () => {
         // ローディングモーダルを隠す
         loadingModal.hide();
     }
-    const startTime = performance.now();
     if (document.getElementById("useStandard").checked) {
+        startTime = performance.now();
         kuromoji.builder({ dicPath: "./js/dicts/standard/" }).build((err, tokenizer) => {
-            showResult(tokenizer.tokenize(analyzeText.value));
+            showResult(tokenizer.tokenize(analyzeTextValue));
         });
     } else if (document.getElementById("useNeologd").checked) {
+        startTime = performance.now();
         kuromoji.builder({ dicPath: "./js/dicts/neologd/" }).build((err, tokenizer) => {
-            showResult(tokenizer.tokenize(analyzeText.value));
+            showResult(tokenizer.tokenize(analyzeTextValue));
         });
     } else {
-        showResult(new TinySegmenter().segment(analyzeText.value));
+        startTime = performance.now();
+        showResult(new TinySegmenter().segment(analyzeTextValue));
     }
 };
