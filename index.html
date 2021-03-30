@@ -9,6 +9,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
         integrity="sha256-DU9iQBJ89dHP2iyusCg++0ych55DAx8QL6P8CYU64bI=" crossorigin="anonymous">
+    <!-- メインCSS -->
+    <style>
+        textarea {
+            overflow: hidden;
+            resize: none;
+        }
+    </style>
 
     <title>kuromoji.js vs NEologd</title>
 </head>
@@ -18,7 +25,6 @@
     <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">kuromoji.js vs NEologd</a>
-            <span class="navbar-text me-auto">v1.1</span>
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/reneeter123/kuromoji.js-vs-neologd">GitHub</a>
@@ -46,11 +52,11 @@
             <input class="form-check-input" type="radio" name="useDictionary" id="useTinySegmenter">
             <label class="form-check-label" for="useTinySegmenter">TinySegmenter</label>
         </div>
-        <div class="input-group">
-            <span class="input-group-text">解析するテキスト</span>
-            <textarea style="overflow: hidden; resize: none;" rows="1" class="form-control" id="analyzeText"></textarea>
-            <button type="button" class="btn btn-outline-primary" id="analyze">解析</button>
-        </div>
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">解析するテキスト</span>
+        <textarea rows="1" class="form-control" id="analyzeText"></textarea>
+        <button type="button" class="btn btn-outline-primary" id="analyze">解析</button>
     </div>
 
     <!-- エラーモーダル -->
@@ -87,8 +93,7 @@
     <!-- 解析結果 -->
     <div class="input-group">
         <span class="input-group-text">解析結果</span>
-        <textarea style="overflow: hidden; resize: none;" rows="1" class="form-control" id="resultText"
-            readonly></textarea>
+        <textarea rows="1" class="form-control" id="resultText" readonly></textarea>
     </div>
     <div class="input-group">
         <span class="input-group-text">解析時間</span>
